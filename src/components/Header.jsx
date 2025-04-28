@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
   return (
     <header>
-      <h1>Mini Ecommerce</h1>
+      <h1>Valfenda Store</h1>
     </header>
   );
 }

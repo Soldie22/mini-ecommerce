@@ -1,11 +1,13 @@
 import React from 'react';
+import '../App.css';
 
-function ProductCard({ nome, preco, imagem }) {
+function ProductCard({ nome, preco, imagem, aoAdicionar }) {
   return (
-    <div style={{ width: '200px', border: '1px solid #ddd', borderRadius: '8px', padding: '10px', textAlign: 'center' }}>
-      <img src={imagem} alt={nome} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+    <div className="product-card">
+      <img src={imagem} alt={nome} />
       <h3>{nome}</h3>
-      <p>R$ {preco}</p>
+      <p>R$ {preco.toFixed(2)}</p>
+      <button onClick={aoAdicionar}>Adicionar ao Carrinho</button>
     </div>
   );
 }
