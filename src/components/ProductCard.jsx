@@ -12,4 +12,6 @@ function ProductCard({ nome, preco, imagem, aoAdicionar }) {
   );
 }
 
+
+
 export default ProductCard;

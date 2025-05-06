@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Header() {
+function Header({ quantidadeItens }) {
   return (
     <header>
-      <h1>Valfenda Store</h1>
+      <h1>Valfenda Store | Carrinho ({quantidadeItens})</h1>
     </header>
   );
 }

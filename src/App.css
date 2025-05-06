@@ -87,3 +87,39 @@ button:hover {
   font-weight: bold;
   color: #007BFF;
 }
+
+/* Estilo do botão de remover */
+.cart button {
+  padding: 4px 8px;
+  margin-left: 4px;
+  border-radius: 8px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cart button:hover {
+  background-color: #c82333;
+}
+
+/* Estilo do total no carrinho */
+.total {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.mensagem-sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px 16px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  width: fit-content;
+  max-width: 90%;
+}

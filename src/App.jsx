@@ -15,12 +15,25 @@ function App() {
 
   const adicionarAoCarrinho = (produto) => {
     setCarrinho((prev) => [...prev, produto]);
+    setMensagem('✅ Produto adicionado ao carrinho!');
+    setTimeout(() => setMensagem(''), 2000);
   };
+
+  const removerDoCarrinho = (indexToRemove) => {
+    setCarrinho((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
+
+  const [mensagem, setMensagem] = useState('');
 
   return (
     <div>
-      <Header />
+      <Header quantidadeItens={carrinho.length} />
       <h1 style={{ textAlign: 'center' }}>Produtos</h1>
+
+      {mensagem && (
+      <div className="mensagem-sucesso">{mensagem}</div>
+      )}
+
       <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
         {produtos.map(produto => (
           <ProductCard
@@ -33,7 +46,7 @@ function App() {
         ))}
       </div>
 
-      <Cart itens={carrinho} />
+      <Cart itens={carrinho} onRemove={removerDoCarrinho} />
     </div>
   );
 }
