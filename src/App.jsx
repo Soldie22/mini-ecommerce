@@ -3,6 +3,8 @@ import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import Cart from './components/Cart';
 import './App.css';
+import Footer from './components/Footer';
+import ProductList from './components/ProductList';
 
 function App() {  
   const [carrinho, setCarrinho] = useState([]);
@@ -34,19 +36,13 @@ function App() {
       <div className="mensagem-sucesso">{mensagem}</div>
       )}
 
-      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-        {produtos.map(produto => (
-          <ProductCard
-            key={produto.id}
-            nome={produto.nome}
-            preco={produto.preco}
-            imagem={produto.imagem}
-            aoAdicionar={() => adicionarAoCarrinho(produto)}
-          />
-        ))}
-      </div>
+      <ProductList produtos={produtos} aoAdicionar={adicionarAoCarrinho} />
 
       <Cart itens={carrinho} onRemove={removerDoCarrinho} />
+
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }
