@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import Cart from './components/Cart';
@@ -9,6 +9,19 @@ import ProductList from './components/ProductList';
 function App() {  
   const [carrinho, setCarrinho] = useState([]);
 
+    // Carrega o carrinho salvo ao iniciar
+  useEffect(() => {
+    const carrinhoSalvo = localStorage.getItem('carrinho');
+    if (carrinhoSalvo) {
+      setCarrinho(JSON.parse(carrinhoSalvo));
+    }
+  }, []);
+
+  // Salva o carrinho sempre que ele mudar
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  }, [carrinho]);
+
   const produtos = [
     { id: 1, nome: 'Camiseta Nerd', preco: 49.90, imagem: 'https://via.placeholder.com/200x150?text=Produto+1' },
     { id: 2, nome: 'Caneca Personalizada', preco: 29.90, imagem: 'https://via.placeholder.com/200x150?text=Produto+2' },
@@ -16,13 +29,33 @@ function App() {
   ];
 
   const adicionarAoCarrinho = (produto) => {
-    setCarrinho((prev) => [...prev, produto]);
+    setCarrinho((prev) => {
+      const existente = prev.find(item => item.id === produto.id);
+      if (existente) {
+        return prev.map(item =>
+          item.id === produto.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
+        );
+      } else {
+        return [...prev, { ...produto, quantidade: 1 }];
+      }
+    });
+
     setMensagem('✅ Produto adicionado ao carrinho!');
     setTimeout(() => setMensagem(''), 2000);
   };
 
-  const removerDoCarrinho = (indexToRemove) => {
-    setCarrinho((prev) => prev.filter((_, index) => index !== indexToRemove));
+  const removerDoCarrinho = (id) => {
+    setCarrinho(prev => {
+      return prev
+        .map(item =>
+          item.id === id
+            ? { ...item, quantidade: item.quantidade - 1 }
+            : item
+        )
+        .filter(item => item.quantidade > 0);
+    });
   };
 
   const [mensagem, setMensagem] = useState('');

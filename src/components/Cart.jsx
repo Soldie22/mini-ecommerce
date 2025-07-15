@@ -12,8 +12,8 @@ function Cart({ itens, onRemove }) {
                 <ul>
                     {itens.map((item, index) => (
                         <li key={index}>
-                           {item.nome} - R$ {item.preco.toFixed(2)}
-                            <button onClick={() => onRemove(index)}>Remover</button>
+                           {item.nome} ({item.quantidade}x) - R$ {(item.preco * item.quantidade).toFixed(2)}
+                            <button onClick={() => onRemove(item.id)}>Remover</button>
                         </li>
                     ))}
                 </ul>
